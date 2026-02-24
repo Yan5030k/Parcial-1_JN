@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcial Primer Cómputo</title>
+    <style>
+        /* Reseteo básico para quitar márgenes por defecto */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Hacemos que el body ocupe toda la pantalla para empujar el footer abajo */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- ESTILOS DEL ENCABEZADO (HEADER) --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: #ffffff;
+            /* Una liniecita gris clara abajo como se ve en la imagen */
+            border-bottom: 1px solid #eaeaea; 
+        }
+
+        .logo {
+            height: 90px; /* Ajustá esto si tu logo.png es muy grande o chiquito */
+        }
+
+        .header-text {
+            color: #0c1b98; /* Un azul oscurito parecido al del logo */
+            text-align: right;
+            font-weight: bold;
+            font-size: 15px;
+            line-height: 1.3;
+        }
+
+        /* --- ESTILOS DEL CUERPO (MAIN) --- */
+        main {
+            flex-grow: 1; /* Esto hace que el centro agarre todo el espacio sobrante */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fcfcfc; /* Un gris super clarito para el fondo */
+        }
+
+        h1 {
+            font-size: 4.5rem; /* Letra bien grandota */
+            color: #333333;
+            font-weight: 900; /* Letra bien negrita (bold) */
+            text-transform: uppercase;
+        }
+
+        /* --- ESTILOS DEL PIE DE PÁGINA (FOOTER) --- */
+        footer {
+            background-color: #1c2bc0; /* Azul chivo del footer */
+            color: #ffffff;
+            text-align: center;
+            padding: 25px 20px 30px 20px;
+        }
+
+        footer h3 {
+            font-size: 15px;
+            text-decoration: underline;
+            margin-bottom: 15px;
+        }
+
+        .integrantes {
+            display: flex;
+            justify-content: center;
+            gap: 40px; /* Separación entre los dos nombres */
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="data:image/png;base64,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" alt="Logo UGB" class="logo">
+        <div class="header-text">
+            Parcial Primer Cómputo Ingeniería en Sistemas y<br>
+            Redes Informáticas
+        </div>
+    </header>
+
+    <main>
+        <h1>TU PAGINA WEB AQUI</h1>
+    </main>
+
+    <footer>
+        <h3>Integrantes del Equipo</h3>
+        <div class="integrantes">
+            <span>JHOAN MAURICIO ORTEGA VENTURA | SMSS003224</span>
+            <span>JEREMIAS NEFTALY FUENTES MENDEZ | SMSS067624</span>
+        </div>
+    </footer>
+
+</body>
+</html>
